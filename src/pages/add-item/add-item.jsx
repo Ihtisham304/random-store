@@ -1,8 +1,12 @@
 import React from "react";
 import { useFormik } from "formik";
 import { additemSchema } from "@/validation/add-item-validation";
+import { itemsService } from "@/services/items";
+import { useAsyncFn } from "@/hooks/useAsync";
 
 function AddItem() {
+  const { loading, execute } = useAsyncFn(itemsService.addItem);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -12,7 +16,7 @@ function AddItem() {
     validationSchema: additemSchema,
     onSubmit: (values, { resetForm }) => {
       console.log("Submitted values:", values);
-      alert("Item Added Successfully!");
+      execute(values);
       resetForm();
     },
   });
@@ -21,7 +25,6 @@ function AddItem() {
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-xl font-bold mb-4">Add New Item</h2>
       <form onSubmit={formik.handleSubmit}>
-        {/* Name Field */}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold">Name:</label>
           <input
@@ -37,7 +40,6 @@ function AddItem() {
           )}
         </div>
 
-        {/* Price Field */}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold">Price:</label>
           <input
@@ -53,7 +55,6 @@ function AddItem() {
           )}
         </div>
 
-        {/* Image URL Field */}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold">
             Image URL:
@@ -71,7 +72,6 @@ function AddItem() {
           )}
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"

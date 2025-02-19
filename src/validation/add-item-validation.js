@@ -7,7 +7,5 @@ export const additemSchema = Yup.object({
   price: Yup.number()
     .positive("Price must be a positive number")
     .required("Price is required"),
-  imgUrl: Yup.string()
-    .url("Enter a valid image URL")
-    .required("Image URL is required"),
+  imgUrl: Yup.string().required("Image URL is required"),
 });

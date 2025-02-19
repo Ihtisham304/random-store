@@ -5,6 +5,13 @@ class ItemsService {
       method: "GET",
     });
   }
+
+  addItem(item) {
+    return makeRequestUnsecure(`items`, {
+      method: "POST",
+      body: item,
+    });
+  }
 }
 
 const service = new ItemsService();

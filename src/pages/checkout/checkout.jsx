@@ -4,14 +4,6 @@ import { useCtx } from "@/context/state";
 function Checkout() {
   const { cart, setCart } = useCtx();
 
-  const removeItem = (id) => {
-    setCart((prev) => {
-      const updatedCart = prev.filter((item) => item.id !== id);
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  };
-
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold">Checkout</h1>
@@ -31,12 +23,6 @@ function Checkout() {
               />
               <h2 className="text-lg font-bold">{item.name}</h2>
               <p className="text-gray-600">${item.price}</p>
-              <button
-                className="mt-2 bg-red-500 text-white px-4 py-2 rounded"
-                onClick={() => removeItem(item.id)}
-              >
-                Remove
-              </button>
             </div>
           ))}
         </div>
