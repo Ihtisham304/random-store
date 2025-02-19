@@ -6,6 +6,7 @@ import { ROUTES } from "../constants/routes";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar/navbar";
 import Checkout from "./checkout/checkout";
+import AddItem from "./add-item/add-item";
 export function Router({}) {
   return (
     <Routes>
@@ -26,6 +27,15 @@ export function Router({}) {
           </>
         }
         path={ROUTES.checkout}
+      />
+      <Route
+        element={
+          <>
+            <Navbar />
+            <AddItem />
+          </>
+        }
+        path={ROUTES.additem}
       />
     </Routes>
   );
