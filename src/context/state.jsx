@@ -1,14 +1,29 @@
-import { createContext, useContext, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react";
 import { reducer } from "./reducer";
 
 const Ctx = createContext({});
 
 export function Provider({ children }) {
-  const initialState = { auth: false, count: 0, cart: [] };
+  const [data, dispatch] = useReducer(reducer, { auth: false, count: 0 });
+  const [cart, setCart] = useState(() => {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  });
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-  return <Ctx.Provider value={{ state, dispatch }}>{children}</Ctx.Provider>;
+  return (
+    <Ctx.Provider value={{ data, dispatch, cart, setCart }}>
+      {children}
+    </Ctx.Provider>
+  );
 }
 
 export function useCtx() {
