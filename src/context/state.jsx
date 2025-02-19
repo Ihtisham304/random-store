@@ -4,8 +4,11 @@ import { reducer } from "./reducer";
 const Ctx = createContext({});
 
 export function Provider({ children }) {
-  const [data, dispatch] = useReducer(reducer, { auth: false, count: 0 });
-  return <Ctx.Provider value={{ data, dispatch }}>{children}</Ctx.Provider>;
+  const initialState = { auth: false, count: 0, cart: [] };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return <Ctx.Provider value={{ state, dispatch }}>{children}</Ctx.Provider>;
 }
 
 export function useCtx() {

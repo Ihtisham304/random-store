@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosUnSecureInstance = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_SERVER_BASE_URL,
+  baseURL:
+    import.meta.env.VITE_REACT_APP_SERVER_BASE_URL || "http://localhost:3000/",
 });
 
 const axiosInstance = axios.create({
@@ -29,6 +30,11 @@ axiosInstance.interceptors.request.use(
 );
 export function makeRequest(url, options) {
   return axiosInstance(url, options)
+    .then((res) => res.data)
+    .catch((error) => Promise.reject(error?.response ?? "Error"));
+}
+export function makeRequestUnsecure(url, options) {
+  return axiosUnSecureInstance(url, options)
     .then((res) => res.data)
     .catch((error) => Promise.reject(error?.response ?? "Error"));
 }

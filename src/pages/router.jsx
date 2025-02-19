@@ -1,21 +1,22 @@
 import { Route, Routes } from "react-router-dom";
+import Items from "./items/items";
 //Routes urls
 import { ROUTES } from "../constants/routes";
 //Components
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/navbar/navbar";
 export function Router({}) {
   return (
     <Routes>
       <Route
         element={
-          <div className="">
-            Home Page
-            <Button variant="primary">Ad</Button>
-          </div>
+          <>
+            <Navbar />
+            <Items />
+          </>
         }
         path={ROUTES.homePage}
       />
-      <Route element={<h2>About</h2>} path={ROUTES.aboutPage} />
     </Routes>
   );
 }
