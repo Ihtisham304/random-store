@@ -15,9 +15,9 @@ function Navbar() {
         RandoStore
       </h1>
       <div className="flex items-center space-x-4">
-        <Link to="/additem" className="text-white">
+        {/* <Link to="/additem" className="text-white">
           Add Item
-        </Link>
+        </Link> */}
         <div className="relative" onClick={() => navigate("/checkout")}>
           <MdOutlineShoppingCart className="w-8 h-8 cursor-pointer" />
           {cart.length > 0 && (

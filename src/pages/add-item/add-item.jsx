@@ -1,22 +1,42 @@
 import React from "react";
 import { useFormik } from "formik";
 import { additemSchema } from "@/validation/add-item-validation";
-import { itemsService } from "@/services/items";
 import { useAsyncFn } from "@/hooks/useAsync";
-
+import { itemsService } from "@/services/items";
+import { use } from "react";
 function AddItem() {
-  const { loading, execute } = useAsyncFn(itemsService.addItem);
-
+  const { execute } = useAsyncFn(itemsService.addItem);
   const formik = useFormik({
     initialValues: {
       name: "",
       price: "",
-      imgUrl: "",
+      img: "",
     },
     validationSchema: additemSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log("Submitted values:", values);
-      execute(values);
+    onSubmit: async (values, { resetForm }) => {
+      // try {
+      //   const response = await fetch("http://localhost:3000/items", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(values),
+      //   });
+      //   const data = await response.json();
+      //   console.log("Item added successfully:", data);
+      //   resetForm();
+      // } catch (error) {
+      //   console.error("Error adding item:", error.message);
+      // }
+      const datTosend = JSON.stringify(values);
+      console.log("data to send", datTosend);
+      execute(datTosend)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.error("Error adding item:", error);
+        });
       resetForm();
     },
   });
@@ -43,7 +63,7 @@ function AddItem() {
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold">Price:</label>
           <input
-            type="number"
+            type="text"
             name="price"
             className="w-full border p-2 rounded mt-1"
             value={formik.values.price}
@@ -61,14 +81,14 @@ function AddItem() {
           </label>
           <input
             type="text"
-            name="imgUrl"
+            name="img"
             className="w-full border p-2 rounded mt-1"
-            value={formik.values.imgUrl}
+            value={formik.values.img}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.imgUrl && formik.errors.imgUrl && (
-            <p className="text-red-500 text-sm">{formik.errors.imgUrl}</p>
+          {formik.touched.img && formik.errors.img && (
+            <p className="text-red-500 text-sm">{formik.errors.img}</p>
           )}
         </div>
 

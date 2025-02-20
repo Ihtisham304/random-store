@@ -1,5 +1,6 @@
 export const ROUTES = Object.freeze({
-  homePage: "/",
-  checkout: "/checkout",
-  additem: "/additem",
+  home: "/",
+  itemsPage: "/items",
+  checkoutPage: "/checkout",
+  additemPage: "/add-item",
 });

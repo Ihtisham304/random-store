@@ -7,9 +7,18 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar/navbar";
 import Checkout from "./checkout/checkout";
 import AddItem from "./add-item/add-item";
+import Home from "./home/home";
 export function Router({}) {
   return (
     <Routes>
+      <Route
+        element={
+          <>
+            <Home />
+          </>
+        }
+        path={ROUTES.home}
+      />
       <Route
         element={
           <>
@@ -17,7 +26,7 @@ export function Router({}) {
             <Items />
           </>
         }
-        path={ROUTES.homePage}
+        path={ROUTES.itemsPage}
       />
       <Route
         element={
@@ -26,7 +35,7 @@ export function Router({}) {
             <Checkout />
           </>
         }
-        path={ROUTES.checkout}
+        path={ROUTES.checkoutPage}
       />
       <Route
         element={
@@ -35,7 +44,7 @@ export function Router({}) {
             <AddItem />
           </>
         }
-        path={ROUTES.additem}
+        path={ROUTES.additemPage}
       />
     </Routes>
   );

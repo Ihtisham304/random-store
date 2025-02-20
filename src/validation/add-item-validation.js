@@ -4,8 +4,8 @@ export const additemSchema = Yup.object({
   name: Yup.string()
     .min(3, "Name must be at least 3 characters")
     .required("Name is required"),
-  price: Yup.number()
-    .positive("Price must be a positive number")
+  price:
+    Yup.string()
     .required("Price is required"),
-  imgUrl: Yup.string().required("Image URL is required"),
+  img: Yup.string().required("Image URL is required"),
 });

@@ -7,6 +7,7 @@ class ItemsService {
   }
 
   addItem(item) {
+    console.log("post data", item);
     return makeRequestUnsecure(`items`, {
       method: "POST",
       body: item,
