@@ -5,7 +5,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-8 text-gray-800">
-          Welcome to Our Store
+          Welcome to Random Store
         </h1>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <Link to="/items">
