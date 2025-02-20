@@ -1,11 +1,12 @@
 import React from "react";
 import { useFormik } from "formik";
 import { additemSchema } from "@/validation/add-item-validation";
-import { useAsyncFn } from "@/hooks/useAsync";
-import { itemsService } from "@/services/items";
-import { use } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 function AddItem() {
-  const { execute } = useAsyncFn(itemsService.addItem);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -14,30 +15,24 @@ function AddItem() {
     },
     validationSchema: additemSchema,
     onSubmit: async (values, { resetForm }) => {
-      // try {
-      //   const response = await fetch("http://localhost:3000/items", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(values),
-      //   });
-      //   const data = await response.json();
-      //   console.log("Item added successfully:", data);
-      //   resetForm();
-      // } catch (error) {
-      //   console.error("Error adding item:", error.message);
-      // }
-      const datTosend = JSON.stringify(values);
-      console.log("data to send", datTosend);
-      execute(datTosend)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => {
-          console.error("Error adding item:", error);
-        });
-      resetForm();
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_REACT_APP_SERVER_BASE_URL}items`,
+          values,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.data) {
+          toast.success("Item added successfully");
+          navigate("/items");
+        }
+        resetForm();
+      } catch (error) {
+        toast.error("error while adding item");
+      }
     },
   });
 

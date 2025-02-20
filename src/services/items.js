@@ -5,14 +5,6 @@ class ItemsService {
       method: "GET",
     });
   }
-
-  addItem(item) {
-    console.log("post data", item);
-    return makeRequestUnsecure(`items`, {
-      method: "POST",
-      body: item,
-    });
-  }
 }
 
 const service = new ItemsService();

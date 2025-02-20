@@ -3,7 +3,6 @@ import Items from "./items/items";
 //Routes urls
 import { ROUTES } from "../constants/routes";
 //Components
-import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar/navbar";
 import Checkout from "./checkout/checkout";
 import AddItem from "./add-item/add-item";

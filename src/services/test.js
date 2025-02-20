@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import { makeRequest } from "../config/makeRequest";
 class TestService {
   getAllPosts() {
